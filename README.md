@@ -22,4 +22,10 @@ In order to run the app you will need to register and add the API Key from http:
 
 For More detailed information please see the wiki.
 
+## Other Variations
+I've also built this app in two other languages.
+
+* **iOS (Swift)** - https://github.com/lherb3/WeatherNow-iOSApp
+* **Android (Java)** - https://github.com/lherb3/WeatherNow-AndroidApp
+
 © Copyright 2021 Larry Herb
