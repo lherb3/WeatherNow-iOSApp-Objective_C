@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		59FFC97525F57F0D001FA897 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFC97425F57F0D001FA897 /* AppDelegate.m */; };
 		59FFC97825F57F0D001FA897 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFC97725F57F0D001FA897 /* SceneDelegate.m */; };
-		59FFC97B25F57F0D001FA897 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFC97A25F57F0D001FA897 /* ViewController.m */; };
+		59FFC97B25F57F0D001FA897 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFC97A25F57F0D001FA897 /* MainViewController.m */; };
 		59FFC97E25F57F0D001FA897 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59FFC97C25F57F0D001FA897 /* Main.storyboard */; };
 		59FFC98025F57F0E001FA897 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59FFC97F25F57F0E001FA897 /* Assets.xcassets */; };
 		59FFC98325F57F0E001FA897 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59FFC98125F57F0E001FA897 /* LaunchScreen.storyboard */; };
@@ -27,6 +27,8 @@
 		59FFC9EB25F5E38B001FA897 /* weather_launch_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59FFC9E225F5E38B001FA897 /* weather_launch_image@2x.png */; };
 		59FFC9EC25F5E38B001FA897 /* location_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59FFC9E325F5E38B001FA897 /* location_icon@3x.png */; };
 		59FFC9ED25F5E38B001FA897 /* location_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 59FFC9E425F5E38B001FA897 /* location_icon.png */; };
+		59FFCA0825F60721001FA897 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFCA0725F60721001FA897 /* IntroViewController.m */; };
+		59FFCA0E25F6076F001FA897 /* LocationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFCA0D25F6076F001FA897 /* LocationSettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +54,8 @@
 		59FFC97425F57F0D001FA897 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		59FFC97625F57F0D001FA897 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		59FFC97725F57F0D001FA897 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		59FFC97925F57F0D001FA897 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		59FFC97A25F57F0D001FA897 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		59FFC97925F57F0D001FA897 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		59FFC97A25F57F0D001FA897 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		59FFC97D25F57F0D001FA897 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		59FFC97F25F57F0E001FA897 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59FFC98225F57F0E001FA897 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,6 +78,10 @@
 		59FFC9E225F5E38B001FA897 /* weather_launch_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather_launch_image@2x.png"; sourceTree = "<group>"; };
 		59FFC9E325F5E38B001FA897 /* location_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_icon@3x.png"; sourceTree = "<group>"; };
 		59FFC9E425F5E38B001FA897 /* location_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location_icon.png; sourceTree = "<group>"; };
+		59FFCA0625F60721001FA897 /* IntroViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
+		59FFCA0725F60721001FA897 /* IntroViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		59FFCA0C25F6076F001FA897 /* LocationSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationSettingsViewController.h; sourceTree = "<group>"; };
+		59FFCA0D25F6076F001FA897 /* LocationSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationSettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,13 +141,17 @@
 				59FFC97425F57F0D001FA897 /* AppDelegate.m */,
 				59FFC97625F57F0D001FA897 /* SceneDelegate.h */,
 				59FFC97725F57F0D001FA897 /* SceneDelegate.m */,
-				59FFC97925F57F0D001FA897 /* ViewController.h */,
-				59FFC97A25F57F0D001FA897 /* ViewController.m */,
+				59FFC97925F57F0D001FA897 /* MainViewController.h */,
+				59FFC97A25F57F0D001FA897 /* MainViewController.m */,
 				59FFC97C25F57F0D001FA897 /* Main.storyboard */,
 				59FFC97F25F57F0E001FA897 /* Assets.xcassets */,
 				59FFC98125F57F0E001FA897 /* LaunchScreen.storyboard */,
 				59FFC98425F57F0E001FA897 /* Info.plist */,
 				59FFC98525F57F0E001FA897 /* main.m */,
+				59FFCA0625F60721001FA897 /* IntroViewController.h */,
+				59FFCA0725F60721001FA897 /* IntroViewController.m */,
+				59FFCA0C25F6076F001FA897 /* LocationSettingsViewController.h */,
+				59FFCA0D25F6076F001FA897 /* LocationSettingsViewController.m */,
 			);
 			path = WeatherNow;
 			sourceTree = "<group>";
@@ -334,10 +344,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59FFC97B25F57F0D001FA897 /* ViewController.m in Sources */,
+				59FFC97B25F57F0D001FA897 /* MainViewController.m in Sources */,
 				59FFC97525F57F0D001FA897 /* AppDelegate.m in Sources */,
 				59FFC98625F57F0E001FA897 /* main.m in Sources */,
 				59FFC97825F57F0D001FA897 /* SceneDelegate.m in Sources */,
+				59FFCA0E25F6076F001FA897 /* LocationSettingsViewController.m in Sources */,
+				59FFCA0825F60721001FA897 /* IntroViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
