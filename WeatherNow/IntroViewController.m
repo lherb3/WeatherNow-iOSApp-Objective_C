@@ -41,6 +41,31 @@
     //===================================
     // Brand Layout
     brandBoxFinalPosition= CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, mainView.frame.size.width, (mainView.frame.size.height-[UIApplication sharedApplication].statusBarFrame.size.height)/2);
+    brandBoxStartPosition= CGRectMake(brandBoxFinalPosition.size.width, brandBoxFinalPosition.origin.y, brandBoxFinalPosition.size.width, brandBoxFinalPosition.size.height);
+    brandBoxView = [[UIView alloc] initWithFrame:brandBoxStartPosition];
+    [mainView addSubview:brandBoxView];
+    
+    //Weather Now Logo
+    UIImageView * weatherNowLogoImageView = [[UIImageView alloc] initWithFrame:CGRectMake((brandBoxView.frame.size.width-200)/2, (brandBoxView.frame.size.height-245), 200, 175)];
+    UIImage * weatherImage = [UIImage imageNamed:@"weather_launch_image.png"];
+    [weatherNowLogoImageView setImage:weatherImage];
+    [weatherNowLogoImageView setContentMode:UIViewContentModeScaleAspectFit];
+    [brandBoxView addSubview:weatherNowLogoImageView];
+    
+    //Weather Now Text
+    weatherNowTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, weatherNowLogoImageView.frame.size.height + weatherNowLogoImageView.frame.origin.y + 30, brandBoxView.frame.size.width - 60, 40)];
+    [weatherNowTitleLabel setText:@"Weather Now!"];
+    [weatherNowTitleLabel setTextColor:[UIColor whiteColor]];
+    [weatherNowTitleLabel setAlpha:1.0];
+    [weatherNowTitleLabel setFont:[UIFont systemFontOfSize:36.0f]];
+    [weatherNowTitleLabel setTextAlignment:NSTextAlignmentCenter];
+    [brandBoxView addSubview:weatherNowTitleLabel];
+    
+    //===================================
+    //= BOTTOM HALF
+    //===================================
+    //Copyright Container
+    
     
     
     
