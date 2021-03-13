@@ -16,13 +16,16 @@
 @synthesize mainView, brandBoxView, weatherNowTitleLabel, copyrightContainerView;
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [super viewDidLoad];
     [self buildLayout];
     
     // User Defaults Code will Go Here Later
-    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"returningUser"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"returningUser"];
+        [[NSUserDefaults standardUserDefaults] setValue:@"New York" forKey:@"locationName"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 - (void)buildLayout{
@@ -54,7 +57,7 @@
     
     //Weather Now Text
     weatherNowTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, weatherNowLogoImageView.frame.size.height + weatherNowLogoImageView.frame.origin.y + 30, brandBoxView.frame.size.width - 60, 40)];
-    [weatherNowTitleLabel setText:@"Weather Now!"];
+    [weatherNowTitleLabel setText:NSLocalizedString(@"introView_appTitle", @"The Title of the App")];
     [weatherNowTitleLabel setTextColor:[UIColor whiteColor]];
     [weatherNowTitleLabel setAlpha:1.0];
     [weatherNowTitleLabel setFont:[UIFont systemFontOfSize:36.0f]];
@@ -78,11 +81,46 @@
     
     //Copyright Text View
     UILabel * copyrightLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 1, copyrightContainerView.frame.size.width, copyrightContainerView.frame.size.height-1)];
-    [copyrightLabel setText:@"Copyright 2021 Larry Herb"];
+    [copyrightLabel setText:NSLocalizedString(@"introView_copyrightText", @"A Copyright Notice for the App")];
     [copyrightLabel setTextColor:[UIColor whiteColor]];
     [copyrightLabel setFont:[UIFont systemFontOfSize:16.0f]];
     [copyrightLabel setTextAlignment:NSTextAlignmentCenter];
     [copyrightContainerView addSubview:copyrightLabel];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    //Sets Light Themed Status Bar
+    return UIStatusBarStyleLightContent;
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    //Animate Brand Box
+    [UIView animateWithDuration:0.75 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+         animations:^{
+            [self->brandBoxView setFrame:self->brandBoxFinalPosition];
+         }
+         completion:^(BOOL finished){
+            [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                 animations:^{
+                    [self->weatherNowTitleLabel setAlpha:1.0];
+                 }
+                 completion:^(BOOL finished){
+                    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                        [self->copyrightContainerView setFrame:self->copyrightFinalPosition];
+                         }
+                         completion:^(BOOL finished){
+                            [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                                 animations:^{
+                                    [self->mainView setAlpha:0.0];
+                                 }
+                                 completion:^(BOOL finished){
+                                    [self performSegueWithIdentifier:@"mainmenu_segue" sender:self];
+                                 }];
+                         }];
+                 }];
+         }];
 }
 
 /*

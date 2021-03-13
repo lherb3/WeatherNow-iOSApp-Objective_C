@@ -10,7 +10,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="MainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,6 +56,7 @@
                     </view>
                     <connections>
                         <outlet property="mainView" destination="dOh-MX-dcy" id="CeT-Do-rS6"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="mainmenu_segue" animates="NO" id="fCX-41-C4l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AEB-l5-p6Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
