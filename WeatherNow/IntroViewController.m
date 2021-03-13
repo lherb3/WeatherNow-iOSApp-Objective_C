@@ -40,7 +40,7 @@
     //= TOP HALF
     //===================================
     // Brand Layout
-    brandBoxFinalPosition= CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, mainView.frame.size.width, (mainView.frame.size.height-[UIApplication sharedApplication].statusBarFrame.size.height)/2);
+    brandBoxFinalPosition = CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, mainView.frame.size.width, (mainView.frame.size.height-[UIApplication sharedApplication].statusBarFrame.size.height)/2);
     brandBoxStartPosition= CGRectMake(brandBoxFinalPosition.size.width, brandBoxFinalPosition.origin.y, brandBoxFinalPosition.size.width, brandBoxFinalPosition.size.height);
     brandBoxView = [[UIView alloc] initWithFrame:brandBoxStartPosition];
     [mainView addSubview:brandBoxView];
@@ -65,10 +65,24 @@
     //= BOTTOM HALF
     //===================================
     //Copyright Container
+    copyrightFinalPosition = CGRectMake(30, mainView.frame.size.height-60, mainView.frame.size.width-60, 60);
+    copyrightStartPosition = CGRectMake(copyrightFinalPosition.origin.x, mainView.frame.size.height, copyrightFinalPosition.size.width, copyrightFinalPosition.size.height);
+    copyrightContainerView = [[UIView alloc] initWithFrame:copyrightStartPosition];
+    [mainView addSubview:copyrightContainerView];
     
+    //Copyright Container White
+    UIView * whiteBorderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, copyrightContainerView.frame.size.width, 1)];
+    [whiteBorderView setAlpha:0.25];
+    [whiteBorderView setBackgroundColor:[UIColor whiteColor]];
+    [copyrightContainerView addSubview:whiteBorderView];
     
-    
-    
+    //Copyright Text View
+    UILabel * copyrightLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 1, copyrightContainerView.frame.size.width, copyrightContainerView.frame.size.height-1)];
+    [copyrightLabel setText:@"Copyright 2021 Larry Herb"];
+    [copyrightLabel setTextColor:[UIColor whiteColor]];
+    [copyrightLabel setFont:[UIFont systemFontOfSize:16.0f]];
+    [copyrightLabel setTextAlignment:NSTextAlignmentCenter];
+    [copyrightContainerView addSubview:copyrightLabel];
 }
 
 /*
