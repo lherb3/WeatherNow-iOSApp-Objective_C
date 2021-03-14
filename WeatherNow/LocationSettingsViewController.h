@@ -9,7 +9,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LocationSettingsViewController : UIViewController
+@interface LocationSettingsViewController : UIViewController <UITextFieldDelegate>{
+    // Main Window
+    IBOutlet UIView * mainView;
+    UIView * locationTextboxContainerView;
+    UILabel * indicatorCurrentLocationLabel;
+    UILabel * indicatorTopLabel;
+    UITextField * searchTextField;
+}
+
+@property (nonatomic, retain) IBOutlet UIView * mainView;
+@property (nonatomic, retain) UIView * locationTextboxContainerView;
+@property (nonatomic, retain) UILabel * indicatorCurrentLocationLabel;
+@property (nonatomic, retain) UILabel * indicatorTopLabel;
+@property (nonatomic, retain) UITextField * searchTextField;
 
 @end
 
