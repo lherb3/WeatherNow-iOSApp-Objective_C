@@ -130,8 +130,37 @@
 
 -(IBAction)locationbtnAction:(id)sender{
     //The Button Has Been Selected
-    [self performSegueWithIdentifier:@"locationSettings_segue" sender:self];
-    NSLog(@"Location Button Tested");
+    [UIView animateWithDuration:0.15 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+         animations:^{
+            [self->locationContainerView setTransform:CGAffineTransformMakeScale(0.90, 0.90)];
+         }
+         completion:^(BOOL finished){
+            [UIView animateWithDuration:0.15 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                 animations:^{
+                    [self->locationContainerView setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
+                 }
+                 completion:^(BOOL finished){
+                    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                            [self->mainView setAlpha:0.0];
+                            [self.view setBackgroundColor:[UIColor blackColor]];
+                         }
+                         completion:^(BOOL finished){
+                            [self performSegueWithIdentifier:@"locationSettings_segue" sender:self];
+                            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                                 animations:^{
+                                    [self->mainView setAlpha:1.0];
+                                    [self.view setBackgroundColor:[UIColor colorWithRed:0.16 green:0.42 blue:0.67 alpha:1.0]];
+                                 }
+                                 completion:nil
+                             ];
+                        }
+                     ];
+                }
+             ];
+         }
+     ];
+    
 }
 
 
