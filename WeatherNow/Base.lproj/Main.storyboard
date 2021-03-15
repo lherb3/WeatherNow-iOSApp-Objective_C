@@ -14,28 +14,49 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1WN-fM-wn9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <connections>
+                        <outlet property="mainView" destination="1WN-fM-wn9" id="6t5-a7-UWT"/>
+                        <segue destination="bvj-Db-oG8" kind="presentation" identifier="locationSettings_segue" animates="NO" id="b5c-9R-nN0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="96"/>
+            <point key="canvasLocation" x="136.80000000000001" y="95.802098950524751"/>
         </scene>
         <!--Location Settings View Controller-->
         <scene sceneID="OKp-tb-sml">
             <objects>
-                <viewController id="bvj-Db-oG8" customClass="LocationSettingsViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="bvj-Db-oG8" customClass="LocationSettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cWh-Av-cQF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ML0-fO-SWD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="OEH-g4-8we"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <connections>
+                        <outlet property="mainView" destination="ML0-fO-SWD" id="f0n-Ge-kkI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MgU-dK-dH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="96"/>
+            <point key="canvasLocation" x="925.60000000000002" y="95.802098950524751"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="Cxx-fT-jqG">
