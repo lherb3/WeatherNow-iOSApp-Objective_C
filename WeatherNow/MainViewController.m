@@ -18,7 +18,72 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self buildLayout];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    //Begin by Loading the Location
+    [mainView setAlpha:0.0];
+    [self loadLocation];
+}
+
+-(void)loadLocation{
+    //Load the Location via URL Session Data Task
+    
+    //Add Code Later
+    
+    // Error
+    // [self displayLoadError];
+    
+    // Success
+    [self addDataToInterface];
+}
+
+-(void) displayLoadError{
+    //Display an Error
+}
+
+-(void)addDataToInterface{
+    //Adds the Information to the UI Screen
+    
+    //Async Wrapper Needed Here
+    [self animateInterfaceIn];
+}
+
+-(void) animateInterfaceIn{
+    //Visual Effect for Loading the Interface In
+    
+    //Async Wrapper Needed Here
+    [currentTemperatureLabel setAlpha:0.0];
+    [currentTemperatureLabel setTransform:CGAffineTransformMakeScale(0.0, 0.0)];
+    [mainView setTransform:CGAffineTransformMakeScale(1.25, 1.25)];
+    [mainView setAlpha:0.0];
+    [weatherConditionIcon setAlpha:0.0];
+    
+    //Current Conditions Item Here set to 0.0 alpha
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+         animations:^{
+            [self->mainView setAlpha:1.0];
+            [self->mainView setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
+         }
+         completion:^(BOOL finished){
+            //Done Animating
+            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                 animations:^{
+                    [self->currentTemperatureLabel setAlpha:1.0];
+                    [self->currentTemperatureLabel setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
+                 }
+                 completion:^(BOOL finished){
+                    //Done Animating
+                    
+                    // Current Conditions Animated Here
+                
+                }
+             ];
+        }
+     ];
+    
 }
 
 - (void) buildLayout{
@@ -26,7 +91,6 @@
     
     [self.view setBackgroundColor:[UIColor colorWithRed:0.16 green:0.42 blue:0.67 alpha:1.0]];
     [mainView setBackgroundColor:[UIColor colorWithRed:0.16 green:0.42 blue:0.67 alpha:1.0]];
-    //[mainView setAlpha:0.0];
     
     //--- [Phone Status Bar] ---
     UIView * phoneStatusBarBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height)];
