@@ -28,6 +28,10 @@
     [self loadLocation];
 }
 
+-(void) displayLoadError{
+    //Display an Error
+}
+
 -(void)loadLocation{
     //Load the Location via URL Session Data Task
     
@@ -40,12 +44,12 @@
     [self addDataToInterface];
 }
 
--(void) displayLoadError{
-    //Display an Error
-}
-
 -(void)addDataToInterface{
     //Adds the Information to the UI Screen
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Logic Goes Here
+    });
     
     //Async Wrapper Needed Here
     [self animateInterfaceIn];
@@ -83,7 +87,6 @@
              ];
         }
      ];
-    
 }
 
 - (void) buildLayout{
@@ -194,28 +197,6 @@
         UIView * conditionsItemView = [self generateCurrentConditionsInformation:i:conditionsContainer];
         [conditionsContainer addSubview:conditionsItemView];
     }
-    
-}
--(UIView *)generateCurrentConditionsInformation:(int)position :(UIView *)parentView{
-    //Generate A Current Conditions Information View
-    
-    UIView * generatedConditionsItemView = [[UIView alloc] initWithFrame:CGRectMake(0, position*40, parentView.frame.size.width, 40)];
-    
-    UIView * whiteBorderView = [[UIView alloc] initWithFrame:CGRectMake(0, generatedConditionsItemView.frame.size.height-4, generatedConditionsItemView.frame.size.width, 1)];
-    [whiteBorderView setBackgroundColor:[UIColor whiteColor]];
-    [whiteBorderView setAlpha:0.25f];
-    [generatedConditionsItemView addSubview:whiteBorderView];
-    
-    UILabel * currentConditionsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, generatedConditionsItemView.frame.size.width, generatedConditionsItemView.frame.size.height-5)];
-    [currentConditionsLabel setText:@"Loading..."];
-    [currentConditionsLabel setTextColor:[UIColor whiteColor]];
-    [currentConditionsLabel setFont:[UIFont systemFontOfSize:12.0f]];
-    [currentConditionsLabel setTextAlignment:NSTextAlignmentLeft];
-    [generatedConditionsItemView addSubview:currentConditionsLabel];
-    [currentConditionsLabelArray addObject:currentConditionsLabel];
-    [currentConditionsLabelContainerArray addObject:generatedConditionsItemView];
-    
-    return generatedConditionsItemView;
 }
 
 -(IBAction)locationbtnAction:(id)sender{
@@ -250,9 +231,29 @@
              ];
          }
      ];
-    
 }
 
+-(UIView *)generateCurrentConditionsInformation:(int)position :(UIView *)parentView{
+    //Generate A Current Conditions Information View
+    
+    UIView * generatedConditionsItemView = [[UIView alloc] initWithFrame:CGRectMake(0, position*40, parentView.frame.size.width, 40)];
+    
+    UIView * whiteBorderView = [[UIView alloc] initWithFrame:CGRectMake(0, generatedConditionsItemView.frame.size.height-4, generatedConditionsItemView.frame.size.width, 1)];
+    [whiteBorderView setBackgroundColor:[UIColor whiteColor]];
+    [whiteBorderView setAlpha:0.25f];
+    [generatedConditionsItemView addSubview:whiteBorderView];
+    
+    UILabel * currentConditionsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, generatedConditionsItemView.frame.size.width, generatedConditionsItemView.frame.size.height-5)];
+    [currentConditionsLabel setText:@"Loading..."];
+    [currentConditionsLabel setTextColor:[UIColor whiteColor]];
+    [currentConditionsLabel setFont:[UIFont systemFontOfSize:12.0f]];
+    [currentConditionsLabel setTextAlignment:NSTextAlignmentLeft];
+    [generatedConditionsItemView addSubview:currentConditionsLabel];
+    [currentConditionsLabelArray addObject:currentConditionsLabel];
+    [currentConditionsLabelContainerArray addObject:generatedConditionsItemView];
+    
+    return generatedConditionsItemView;
+}
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
     //Sets Light Themed Status Bar
