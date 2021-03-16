@@ -30,6 +30,19 @@
 
 -(void) displayLoadError{
     //Display an Error
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Load Next Screen
+        UIAlertController * alert = [UIAlertController
+            alertControllerWithTitle:NSLocalizedString(@"mainView_loadCity_errorMessage_title", @"Error Title")
+            message:NSLocalizedString(@"mainView_loadCity_errorMessage", @"Load City Error Message")
+            preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"mainView_loadCity_errorMessage_okButton", @"OK Button") style:UIAlertActionStyleDefault
+            handler:^(UIAlertAction * action) {
+                NSLog(@"OK Button Pressed");
+                [self performSegueWithIdentifier:@"locationSettings_segue" sender:self];
+            }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    });
 }
 
 -(void)loadLocation{
