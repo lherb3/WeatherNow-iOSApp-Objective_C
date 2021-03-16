@@ -111,6 +111,7 @@
     //--- [Phone Status Bar] ---
     UIView * phoneStatusBarBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height)];
     [phoneStatusBarBG setBackgroundColor:[UIColor blackColor]];
+    [phoneStatusBarBG setAlpha:0.25];
     [self.view addSubview:phoneStatusBarBG];
     
     //===================================

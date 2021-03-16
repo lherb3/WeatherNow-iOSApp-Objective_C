@@ -21,6 +21,75 @@
     [self buildLayout];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    //View is about to appear
+    [self animateInterfaceIn];
+}
+
+-(void)validateTextEntry{
+    //Validate Text Entry
+    [searchTextField resignFirstResponder];
+    if([searchTextField.text length]==0){
+        //Empty Textbox
+        UIAlertController * alert = [UIAlertController
+            alertControllerWithTitle:NSLocalizedString(@"locationSettingsView_popupMessage_enterCityTitle", @"Please Enter A City Title")
+            message:NSLocalizedString(@"locationSettingsView_popupMessage_enterCity", @"Enter City Name")
+            preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"locationSettingsView_popupMessage_okBtn", @"OK Button") style:UIAlertActionStyleDefault
+            handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }else{
+        //Text Box Has Text
+        [[NSUserDefaults standardUserDefaults] setValue:searchTextField.text forKey:@"locationName"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self closeScreen];
+    }
+}
+
+-(void)closeScreen{
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+         animations:^{
+            [self->mainView setAlpha:0.0];
+         }
+         completion:^(BOOL finished){
+            [self dismissViewControllerAnimated:NO completion:nil];
+        }
+     ];
+}
+
+-(void)animateInterfaceIn{
+    //Visual Effect for Loading the Interface In
+    [indicatorTopLabel setAlpha:0.0];
+    [indicatorCurrentLocationLabel setAlpha:0.0];
+    [indicatorCurrentLocationLabel setTransform:CGAffineTransformMakeScale(1.25, 1.25)];
+    [locationTextboxContainerView setAlpha:0.0];
+    [mainView setAlpha:1.0];
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+         animations:^{
+            [self->indicatorTopLabel setAlpha:1.0];
+         }
+         completion:^(BOOL finished){
+            [UIView animateWithDuration:0.75 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                 animations:^{
+                    [self->indicatorCurrentLocationLabel setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
+                    [self->indicatorCurrentLocationLabel setAlpha:1.0];
+                 }
+                 completion:^(BOOL finished){
+                    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                            [self->locationTextboxContainerView setAlpha:1.0];
+                         }
+                         completion:nil
+                     ];
+                
+                }
+             ];
+        
+        }
+     ];
+}
+
 -(void) buildLayout {
     //The Layout is Built Here
     
@@ -108,8 +177,19 @@
     [indicatorCurrentLocationLabel setTextAlignment:NSTextAlignmentCenter];
     [indicatorTextContainerView addSubview:indicatorCurrentLocationLabel];
 }
--(IBAction)applyBtnAction:(id)sender{
-    NSLog(@"Apply Button");
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    //Text Field Should End Editing
+    [textField resignFirstResponder];
+    return true;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    //Text Field Should Return Delegate Industry
+    [searchTextField resignFirstResponder];
+    [self.view endEditing:true];
+    [self validateTextEntry];
+    return true;
 }
 
 -(void)removeKeyboard:(id)iSender {
@@ -117,22 +197,17 @@
     [searchTextField resignFirstResponder];
 }
 
--(void)closeScreen{
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
-         animations:^{
-            [self->mainView setAlpha:0.0];
-         }
-         completion:^(BOOL finished){
-            [self dismissViewControllerAnimated:NO completion:nil];
-        }
-     ];
-}
-
 -(IBAction)backBtnAction:(id)sender{
     //The Back Button was selected
     [self closeScreen];
 }
 
+-(IBAction)applyBtnAction:(id)sender{
+    //The Apply Button was Selected
+    [self.view endEditing:true];
+    [searchTextField resignFirstResponder];
+    [self validateTextEntry];
+}
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
     //Sets Light Themed Status Bar
