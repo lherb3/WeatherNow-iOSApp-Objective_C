@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		59088FD925FCA29400930A26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59088FDB25FCA29400930A26 /* Localizable.strings */; };
+		59BBDC04260478C0007AB54F /* CurrentWeatherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BBDC03260478C0007AB54F /* CurrentWeatherObject.m */; };
+		59BBDC0A260483BC007AB54F /* CoordinateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BBDC09260483BC007AB54F /* CoordinateObject.m */; };
+		59BBDC1026048CF8007AB54F /* MainWeatherInfoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BBDC0F26048CF8007AB54F /* MainWeatherInfoObject.m */; };
+		59BBDC1626048FF4007AB54F /* WindObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BBDC1526048FF4007AB54F /* WindObject.m */; };
 		59FFC97525F57F0D001FA897 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFC97425F57F0D001FA897 /* AppDelegate.m */; };
 		59FFC97825F57F0D001FA897 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFC97725F57F0D001FA897 /* SceneDelegate.m */; };
 		59FFC97B25F57F0D001FA897 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FFC97A25F57F0D001FA897 /* MainViewController.m */; };
@@ -53,6 +57,14 @@
 		59088FDF25FCA2AA00930A26 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		59088FE025FCA2BC00930A26 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		59088FE125FCA2CD00930A26 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		59BBDC02260478C0007AB54F /* CurrentWeatherObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentWeatherObject.h; sourceTree = "<group>"; };
+		59BBDC03260478C0007AB54F /* CurrentWeatherObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrentWeatherObject.m; sourceTree = "<group>"; };
+		59BBDC08260483BC007AB54F /* CoordinateObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordinateObject.h; sourceTree = "<group>"; };
+		59BBDC09260483BC007AB54F /* CoordinateObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordinateObject.m; sourceTree = "<group>"; };
+		59BBDC0E26048CF8007AB54F /* MainWeatherInfoObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWeatherInfoObject.h; sourceTree = "<group>"; };
+		59BBDC0F26048CF8007AB54F /* MainWeatherInfoObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWeatherInfoObject.m; sourceTree = "<group>"; };
+		59BBDC1426048FF4007AB54F /* WindObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindObject.h; sourceTree = "<group>"; };
+		59BBDC1526048FF4007AB54F /* WindObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindObject.m; sourceTree = "<group>"; };
 		59FFC97025F57F0D001FA897 /* WeatherNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59FFC97325F57F0D001FA897 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		59FFC97425F57F0D001FA897 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -196,6 +208,14 @@
 		59FFC9B825F5B5A1001FA897 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				59BBDC02260478C0007AB54F /* CurrentWeatherObject.h */,
+				59BBDC03260478C0007AB54F /* CurrentWeatherObject.m */,
+				59BBDC08260483BC007AB54F /* CoordinateObject.h */,
+				59BBDC09260483BC007AB54F /* CoordinateObject.m */,
+				59BBDC0E26048CF8007AB54F /* MainWeatherInfoObject.h */,
+				59BBDC0F26048CF8007AB54F /* MainWeatherInfoObject.m */,
+				59BBDC1426048FF4007AB54F /* WindObject.h */,
+				59BBDC1526048FF4007AB54F /* WindObject.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -350,10 +370,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59BBDC1626048FF4007AB54F /* WindObject.m in Sources */,
 				59FFC97B25F57F0D001FA897 /* MainViewController.m in Sources */,
+				59BBDC04260478C0007AB54F /* CurrentWeatherObject.m in Sources */,
 				59FFC97525F57F0D001FA897 /* AppDelegate.m in Sources */,
 				59FFC98625F57F0E001FA897 /* main.m in Sources */,
+				59BBDC0A260483BC007AB54F /* CoordinateObject.m in Sources */,
 				59FFC97825F57F0D001FA897 /* SceneDelegate.m in Sources */,
+				59BBDC1026048CF8007AB54F /* MainWeatherInfoObject.m in Sources */,
 				59FFCA0E25F6076F001FA897 /* LocationSettingsViewController.m in Sources */,
 				59FFCA0825F60721001FA897 /* IntroViewController.m in Sources */,
 			);

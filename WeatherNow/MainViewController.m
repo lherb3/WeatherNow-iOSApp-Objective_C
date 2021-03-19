@@ -13,7 +13,7 @@
 
 @implementation MainViewController
 
-@synthesize mainView, blackOverlayView, currentConditionsDescLabel, currentConditionsLabelArray, currentConditionsLabelContainerArray, currentTemperatureLabel, locationNameLabel, openWeatherMapAPIKey, weatherConditionIcon;
+@synthesize mainView, blackOverlayView, currentConditionsDescLabel, currentConditionsLabelArray, currentConditionsLabelContainerArray, currentTemperatureLabel, locationNameLabel, openWeatherMapAPIKey, weatherConditionIcon, currentWeatherObject;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,13 +48,43 @@
 -(void)loadLocation{
     //Load the Location via URL Session Data Task
     
-    //Add Code Later
-    
-    // Error
-    // [self displayLoadError];
-    
-    // Success
-    [self addDataToInterface];
+    openWeatherMapAPIKey = [NSString stringWithFormat:@"%@", @"ecf4ff22bf2e922b0957a7a66be5329d"];
+    NSString * languageCode = [NSString stringWithFormat:@"%@", [[NSLocale currentLocale] languageCode]];
+    [locationNameLabel setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"locationName"]];
+    NSString * urlString = [NSString stringWithFormat:@"%@%@%@%@%@%@", @"https://api.openweathermap.org/data/2.5/weather?q=", [[NSUserDefaults standardUserDefaults] objectForKey:@"locationName"], @"&appid=", openWeatherMapAPIKey, @"&lang=", languageCode];
+    NSURL * url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"Mozilla/4.0 (compatible; MSIE 5.23; Mac_PowerPC)" forHTTPHeaderField:@"User-Agent"];
+    NSURLSession * session = [NSURLSession sharedSession];
+    NSURLSessionDataTask * task = [session dataTaskWithRequest:request
+                                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error){
+            //Error Has Occured
+            [self displayLoadError];
+        }else{
+            if(data==nil){
+                //No Data Was returned
+                [self displayLoadError];
+            }else{
+                // NSString * jsonRaw = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSError * jsonError = nil;
+                NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+                if(!json){
+                    //JSON is not a Valid Object
+                    NSLog(@"Error: JSON Format cannot be parsed");
+                    [self displayLoadError];
+                }else{
+                    //JSON is a Valid Object
+                    
+                    self->currentWeatherObject = [[CurrentWeatherObject alloc] init:json];
+                    [self addDataToInterface];
+                }
+                
+            }
+        }
+    }];
+    [task resume];
 }
 
 -(void)addDataToInterface{
@@ -62,10 +92,10 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         //Logic Goes Here
+        //if([self->currentWeatherObject httpCode])
+        //Async Wrapper Needed Here
+        [self animateInterfaceIn];
     });
-    
-    //Async Wrapper Needed Here
-    [self animateInterfaceIn];
 }
 
 -(void) animateInterfaceIn{

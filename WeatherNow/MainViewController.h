@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CurrentWeatherObject.h"
 
 @interface MainViewController : UIViewController{
     // Main Window
@@ -19,7 +20,7 @@
     UILabel * currentTemperatureLabel;
     UILabel * currentConditionsDescLabel;
     UIImageView * weatherConditionIcon;
-    //currentWeatherObject
+    CurrentWeatherObject * currentWeatherObject;
     NSString * openWeatherMapAPIKey; //Register for an API Key Here: https://openweathermap.org/api/
 }
 
@@ -31,7 +32,7 @@
 @property (nonatomic, retain) UILabel * currentTemperatureLabel;
 @property (nonatomic, retain) UILabel * currentConditionsDescLabel;
 @property (nonatomic, retain) UIImageView * weatherConditionIcon;
-// current weather object
+@property (nonatomic, retain) CurrentWeatherObject * currentWeatherObject;
 @property (nonatomic, retain) NSString * openWeatherMapAPIKey;
 
 @end
