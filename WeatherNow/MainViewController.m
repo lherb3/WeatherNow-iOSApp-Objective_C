@@ -92,9 +92,12 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         //Logic Goes Here
-        //if([self->currentWeatherObject httpCode])
-        //Async Wrapper Needed Here
-        [self animateInterfaceIn];
+        if(self->currentWeatherObject->httpCode==200){
+            //Everything is good url wise
+            [self->currentTemperatureLabel setText:[NSString stringWithFormat:@"%f", self->currentWeatherObject->weatherOverview->temperatureKelvin]];
+            [self animateInterfaceIn];
+            
+        }
     });
 }
 

@@ -10,8 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CoordinateObject : NSObject{
-    double latitude;
-    double longitude;
+    @public double latitude;
+    @public double longitude;
 }
 
 -(id)init:(NSDictionary *)dictionary;

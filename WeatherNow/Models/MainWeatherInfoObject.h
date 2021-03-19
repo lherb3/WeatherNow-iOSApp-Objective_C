@@ -10,11 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MainWeatherInfoObject : NSObject{
-    double temperatureKelvin;
-    int pressure;
-    int humidity;
-    double temperatureKelvinMin;
-    double temperatureKelvinMax;
+    @public double temperatureKelvin;
+    @public int pressure;
+    @public int humidity;
+    @public double temperatureKelvinMin;
+    @public double temperatureKelvinMax;
 }
 
 -(id)init:(NSDictionary *)dictionary;

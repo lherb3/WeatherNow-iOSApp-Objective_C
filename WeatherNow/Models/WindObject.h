@@ -10,9 +10,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WindObject : NSObject{
-    double speed;
-    double degrees;
-    double gust;
+    @public double speed;
+    @public double degrees;
+    @public double gust;
 }
 -(id)init:(NSDictionary *)dictionary;
 

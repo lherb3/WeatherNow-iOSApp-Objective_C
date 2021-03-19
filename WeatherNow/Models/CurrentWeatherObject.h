@@ -15,16 +15,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CurrentWeatherObject : NSObject{
     //Declare Variable Here
     
-    CoordinateObject * coordinate;
-    NSMutableArray * weatherConditionsArray;
-    NSString * base;
-    MainWeatherInfoObject * weatherOverview;
-    int visibility;
-    WindObject * wind;
-    int identifier;
-    int dt;
-    NSString * cityName;
-    int httpCode;
+    @public CoordinateObject * coordinate;
+    @public NSMutableArray * weatherConditionsArray;
+    @public NSString * base;
+    @public MainWeatherInfoObject * weatherOverview;
+    @public int visibility;
+    @public WindObject * wind;
+    @public int identifier;
+    @public int dt;
+    @public NSString * cityName;
+    @public int httpCode;
 }
 
 @property (nonatomic, retain) CoordinateObject * coordinate;
