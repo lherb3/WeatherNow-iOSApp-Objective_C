@@ -89,12 +89,6 @@
     [copyrightContainerView addSubview:copyrightLabel];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    //Sets Light Themed Status Bar
-    return UIStatusBarStyleLightContent;
-}
-
-
 -(void)viewWillAppear:(BOOL)animated{
     //Animate Brand Box
     [UIView animateWithDuration:0.75 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
@@ -122,6 +116,11 @@
                          }];
                  }];
          }];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    //Sets Light Themed Status Bar
+    return UIStatusBarStyleLightContent;
 }
 
 /*

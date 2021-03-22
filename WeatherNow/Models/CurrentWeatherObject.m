@@ -24,8 +24,7 @@
             //Nothing in Conditions
         }else{
             //Look through
-            for (int i = 0; i < [weatherJSON count]; i++)
-            {
+            for (int i = 0; i < [weatherJSON count]; i++){
                 [weatherConditionsArray addObject:[weatherJSON objectAtIndex:i]];
             }
         }
@@ -39,10 +38,6 @@
     cityName = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"name"]];
     httpCode = [[dictionary objectForKey:@"cod"] intValue];
     
-    //coordinate object here
-    NSLog(@"Object Recieved");
-    NSLog(@"%@", dictionary);
-    //NSLog(@"Coordinate %@", [dictionary objectForKey:@"coord"]);
     return self;
 }
 

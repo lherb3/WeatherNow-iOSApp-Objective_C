@@ -14,6 +14,7 @@
     
     latitude = [[dictionary objectForKey:@"lat"] doubleValue];
     longitude = [[dictionary objectForKey:@"lon"] doubleValue];
+    
     return self;
 }
 

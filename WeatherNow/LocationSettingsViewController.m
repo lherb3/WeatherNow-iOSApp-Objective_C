@@ -53,6 +53,7 @@
             [self->mainView setAlpha:0.0];
          }
          completion:^(BOOL finished){
+            //Done Animating
             [self dismissViewControllerAnimated:NO completion:nil];
         }
      ];
@@ -95,6 +96,7 @@
     
     [self.view setBackgroundColor:[UIColor blackColor]];
     [mainView setBackgroundColor:[UIColor blackColor]];
+    [mainView setAlpha:0.0];
     
     //--- [Phone Status Bar] ---
     UIView * phoneStatusBarBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height)];

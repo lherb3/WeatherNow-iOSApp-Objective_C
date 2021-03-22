@@ -24,12 +24,14 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     //Begin by Loading the Location
+    
     [mainView setAlpha:0.0];
     [self loadLocation];
 }
 
 -(void) displayLoadError{
     //Display an Error
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         //Load Next Screen
         UIAlertController * alert = [UIAlertController
@@ -48,10 +50,11 @@
 -(void)loadLocation{
     //Load the Location via URL Session Data Task
     
-    openWeatherMapAPIKey = [NSString stringWithFormat:@"%@", @"ecf4ff22bf2e922b0957a7a66be5329d"];
+    openWeatherMapAPIKey = [NSString stringWithFormat:@"%@", @"API_KEY_HERE"];
     NSString * languageCode = [NSString stringWithFormat:@"%@", [[NSLocale currentLocale] languageCode]];
+    
     [locationNameLabel setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"locationName"]];
-    NSString * urlString = [NSString stringWithFormat:@"%@%@%@%@%@%@", @"https://api.openweathermap.org/data/2.5/weather?q=", [[NSUserDefaults standardUserDefaults] objectForKey:@"locationName"], @"&appid=", openWeatherMapAPIKey, @"&lang=", languageCode];
+    NSString * urlString = [NSString stringWithFormat:@"%@%@%@%@%@%@", @"https://api.openweathermap.org/data/2.5/weather?q=", [[[NSUserDefaults standardUserDefaults] objectForKey:@"locationName"] stringByReplacingOccurrencesOfString:@" " withString:@"+"], @"&appid=", openWeatherMapAPIKey, @"&lang=", languageCode];
     NSURL * url = [NSURL URLWithString:urlString];
     NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
     [request setHTTPMethod:@"GET"];
@@ -67,7 +70,6 @@
                 //No Data Was returned
                 [self displayLoadError];
             }else{
-                // NSString * jsonRaw = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 NSError * jsonError = nil;
                 NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
                 if(!json){
@@ -87,16 +89,78 @@
     [task resume];
 }
 
+-(double)convertKelvinToF:(double)originalValue{
+    //Converts Kelvin Temperature to Fahrenheit
+    
+    double convertedValue = 0.0;
+    convertedValue = originalValue*9/5-459.67;
+    return convertedValue;
+}
+
 -(void)addDataToInterface{
     //Adds the Information to the UI Screen
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        //Logic Goes Here
+        //Dispatch AJAX QUEUE
         if(self->currentWeatherObject->httpCode==200){
             //Everything is good url wise
-            [self->currentTemperatureLabel setText:[NSString stringWithFormat:@"%f", self->currentWeatherObject->weatherOverview->temperatureKelvin]];
-            [self animateInterfaceIn];
             
+            //Update Temperature
+            NSString * tempString = [NSString stringWithFormat:@"%.0f", [self convertKelvinToF:self->currentWeatherObject->weatherOverview->temperatureKelvin]];
+            [self->currentTemperatureLabel setText:[NSString stringWithFormat:@"%@°", tempString]];
+            
+            //Add Conditions Description Strings
+            NSString * currentConditions = [NSString stringWithFormat:@""];
+            int conditionPosition = 0;
+            for (NSDictionary *condition in self->currentWeatherObject->weatherConditionsArray){
+                NSString * startComma = [NSString stringWithFormat:@", "];
+                if(conditionPosition==0){
+                    //Add A Blank Start Comma and Load first Image Icon for Conditions
+                    startComma = [NSString stringWithFormat:@""];
+                    
+                    //Create URL and Initate a HTTP Download Image Task
+                    NSString * iconURL = [NSString stringWithFormat:@"%@%@%@", @"https://openweathermap.org/img/w/", [condition objectForKey:@"icon"], @".png"];
+                    dispatch_async(dispatch_get_global_queue(0,0), ^{
+                        NSURLSessionTask * downloadImageTask = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:iconURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                            if(data==nil){
+                                NSLog(@"Error No Data");
+                                return;
+                            }else{
+                                UIImage * image = [UIImage imageWithData:data];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self->weatherConditionIcon setImage:image];
+                                    [self->weatherConditionIcon setAlpha:1.0];
+                                });
+                            }
+                        }];
+                        [downloadImageTask resume];
+                    });
+                }
+                currentConditions = [NSString stringWithFormat:@"%@%@%@", currentConditions, startComma, [condition objectForKey:@"main"]];
+                conditionPosition = conditionPosition + 1;
+            }
+            [self->currentConditionsDescLabel setText:currentConditions];
+            
+            //Add Humidity String
+            [[self->currentConditionsLabelArray objectAtIndex:0] setText:[NSString stringWithFormat:@"%@ %@ %d%@", NSLocalizedString(@"mainView_currentConditions_humidityLabel", @"Humidity Label"), @": ", self->currentWeatherObject->weatherOverview->humidity, @"%"]];
+            
+            //Add Wind Info
+            NSString * degreesString = [NSString stringWithFormat:@"%.1f", self->currentWeatherObject->wind->degrees];
+            [[self->currentConditionsLabelArray objectAtIndex:1] setText:[NSString stringWithFormat:@"%@ %@ %.1f %@ %@ %@%@", NSLocalizedString(@"mainView_currentConditions_windLabel", @"Wind Label"), @": ", self->currentWeatherObject->wind->speed, NSLocalizedString(@"mainView_CurrentConditions_metersPerSecondLabel", @"Meters Per Second Label"), @"@", degreesString, @"°"]];
+            
+            //Add Pressure Info
+            [[self->currentConditionsLabelArray objectAtIndex:2] setText:[NSString stringWithFormat:@"%@ %@ %d %@", NSLocalizedString(@"mainView_currentConditions_pressureLabel", @"Pressure Label"), @": ", self->currentWeatherObject->weatherOverview->pressure, @"mb"]];
+            
+            //Add Min Temperature Info
+            [[self->currentConditionsLabelArray objectAtIndex:3] setText:[NSString stringWithFormat:@"%@ %@ %0.0f%@", NSLocalizedString(@"mainView_currentConditions_minLabel", @"Min Temp Label"), @": ", [self convertKelvinToF:self->currentWeatherObject->weatherOverview->temperatureKelvinMin], @"°"]];
+            
+            //Add Max Temperature Info
+            [[self->currentConditionsLabelArray objectAtIndex:4] setText:[NSString stringWithFormat:@"%@ %@ %0.0f%@", NSLocalizedString(@"mainView_currentConditions_maxLabel", @"Max Temp Label"), @": ", [self convertKelvinToF:self->currentWeatherObject->weatherOverview->temperatureKelvinMax], @"°"]];
+            
+            //Update Temperature
+            [self animateInterfaceIn];
+        }else{
+            [self displayLoadError];
         }
     });
 }
@@ -110,6 +174,10 @@
     [mainView setTransform:CGAffineTransformMakeScale(1.25, 1.25)];
     [mainView setAlpha:0.0];
     [weatherConditionIcon setAlpha:0.0];
+    
+    for (int i = 0; i <5; i++){
+        [[self->currentConditionsLabelContainerArray objectAtIndex:i] setAlpha:0.0];
+    }
     
     //Current Conditions Item Here set to 0.0 alpha
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
@@ -125,10 +193,16 @@
                     [self->currentTemperatureLabel setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
                  }
                  completion:^(BOOL finished){
-                    //Done Animating
-                    
-                    // Current Conditions Animated Here
-                
+                    for (int i = 0; i <5; i++){
+                        [UIView animateWithDuration:0.25 delay:0.25*i options:UIViewAnimationOptionCurveEaseIn
+                             animations:^{
+                                [[self->currentConditionsLabelContainerArray objectAtIndex:i] setAlpha:1.0];
+                             }
+                             completion:^(BOOL finished){
+                                //Done Animated
+                            }
+                         ];
+                    }
                 }
              ];
         }
@@ -238,7 +312,10 @@
     UIView * conditionsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, currentConditionsHeaderContainerView.frame.origin.y + currentConditionsHeaderContainerView.frame.size.height, bottomHalfView.frame.size.width, ((mainView.frame.size.height-[UIApplication sharedApplication].statusBarFrame.size.height)/2)-15)];
     [bottomHalfView addSubview:conditionsContainer];
     
-    //Conditions Item View (add code Later)
+    
+    //Conditions Item View
+    currentConditionsLabelArray = [[NSMutableArray alloc] init];
+    currentConditionsLabelContainerArray = [[NSMutableArray alloc] init];
     for (int i = 0; i <5; i++){
         //Create 5 items
         UIView * conditionsItemView = [self generateCurrentConditionsInformation:i:conditionsContainer];
@@ -264,6 +341,7 @@
                             [self.view setBackgroundColor:[UIColor blackColor]];
                          }
                          completion:^(BOOL finished){
+                            //Segue Activated
                             [self performSegueWithIdentifier:@"locationSettings_segue" sender:self];
                             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
                                  animations:^{
